@@ -63,20 +63,19 @@ bool string_is_substring_of(str_t* self, str_t* other)
                 return false;
         }
         for (int i = 0; i < self -> length; i++) {
-                if (self -> data[i] == other -> data[0]) {
-                        int start = i;
-                        int end = start + other -> length;
-                        if (end > self -> length) {
-                                return false;
-                        }
-                        for (int j = start; j < end; j++) {
-                                if (self -> data[j] != other -> data[j]) {
-                                        return false;
-                                }
-                        }
-                        return true;
+                if (self -> data[i] != other -> data[0]) {
+                        continue;
                 }
+                int start = i;
+                int end = i + other -> length;
+                for (int j = start; j < end; j++) {
+                        if (self -> data[j] != other -> data[j - i]) {
+                                continue;
+                        }
+                }
+                return true;
         }
+
         return false;
 }
 
