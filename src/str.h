@@ -9,9 +9,9 @@ str_t* string_init(char* data);
 
 void string_free(str_t* self);
 
-void string_prepend(str_t* self, str_t* to_prepend);
+str_t* string_prepend(str_t* self, str_t* to_prepend);
 
-void string_append(str_t* self, str_t* to_append);
+str_t* string_append(str_t* self, str_t* to_append);
 
 bool string_equals(str_t* self, str_t* other);
 

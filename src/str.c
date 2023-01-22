@@ -25,9 +25,24 @@ void string_free(str_t* self)
         free(self);
 }
 
-void string_prepend(str_t* self, str_t* to_prepend);
+str_t* string_prepend(str_t* self, str_t* to_prepend)
+{
+        return string_append(to_prepend, self);
+}
 
-void string_append(str_t* self, str_t* to_append);
+str_t* string_append(str_t* self, str_t* to_append)
+{
+        str_t* string = (str_t*) malloc(sizeof(str_t));
+        size_t new_length = self -> length + to_append -> length;
+        string -> data = (char*) malloc(new_length * sizeof(char));
+        for (int i = 0; i < self -> length; i++) {
+                string -> data[i] = self -> data[i];
+        }
+        for (int i = 0; i < to_append -> length; i++) {
+                string -> data[self -> length + i] = to_append -> data[i];
+        }
+        return string;
+}
 
 bool string_equals(str_t* self, str_t* other)
 {
