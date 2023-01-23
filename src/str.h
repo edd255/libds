@@ -5,18 +5,15 @@ typedef struct {
     char* data;
 } str_t;
 
-str_t* string_init(char* data);
+typedef struct {
+    str_t* (* const init)(char* data);
+    void (* const free)(str_t* self);
+    str_t* (* const prepend)(str_t*, str_t*);
+    str_t* (* const append)(str_t*, str_t*);
+    bool (* const equals)(str_t* self, str_t* other);
+    bool (* const is_substring_of)(str_t* self, str_t* other);
+    int (* const index_of)(str_t* self, char* character);
+    void (* const fill)(str_t* self, char* character);
+} namespace_string;
 
-void string_free(str_t* self);
-
-str_t* string_prepend(str_t* self, str_t* to_prepend);
-
-str_t* string_append(str_t* self, str_t* to_append);
-
-bool string_equals(str_t* self, str_t* other);
-
-bool string_is_substring_of(str_t* self, str_t* other);
-
-int string_index_of(str_t* self, char* character);
-
-void string_fill(str_t* self, char* character);
+extern namespace_string const string;

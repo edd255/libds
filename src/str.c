@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include "str.h"
 
-size_t char_get_length(const char *str)
+static size_t char_get_length(const char *str)
 {
     const char* s;
     for (s = str; *s; ++s);
@@ -12,7 +12,7 @@ size_t char_get_length(const char *str)
 }
 
 
-str_t* string_init(char* data)
+static str_t* string_init(char* data)
 {
         str_t* string = (str_t*) malloc(sizeof(str_t));
         string -> length = char_get_length(data);
@@ -20,31 +20,31 @@ str_t* string_init(char* data)
         return string;
 }
 
-void string_free(str_t* self)
+static void string_free(str_t* self)
 {
         free(self);
 }
 
-str_t* string_prepend(str_t* self, str_t* to_prepend)
+static str_t* string_append(str_t* self, str_t* to_append)
+{
+        str_t* str = (str_t*) malloc(sizeof(str_t));
+        size_t new_length = self -> length + to_append -> length;
+        str -> data = (char*) malloc(new_length * sizeof(char));
+        for (int i = 0; i < self -> length; i++) {
+                str -> data[i] = self -> data[i];
+        }
+        for (int i = 0; i < to_append -> length; i++) {
+                str -> data[self -> length + i] = to_append -> data[i];
+        }
+        return str;
+}
+
+static str_t* string_prepend(str_t* self, str_t* to_prepend)
 {
         return string_append(to_prepend, self);
 }
 
-str_t* string_append(str_t* self, str_t* to_append)
-{
-        str_t* string = (str_t*) malloc(sizeof(str_t));
-        size_t new_length = self -> length + to_append -> length;
-        string -> data = (char*) malloc(new_length * sizeof(char));
-        for (int i = 0; i < self -> length; i++) {
-                string -> data[i] = self -> data[i];
-        }
-        for (int i = 0; i < to_append -> length; i++) {
-                string -> data[self -> length + i] = to_append -> data[i];
-        }
-        return string;
-}
-
-bool string_equals(str_t* self, str_t* other)
+static bool string_equals(str_t* self, str_t* other)
 {
         if (self -> length != other -> length) {
                 return false;
@@ -57,7 +57,7 @@ bool string_equals(str_t* self, str_t* other)
         return true;
 }
 
-bool string_is_substring_of(str_t* self, str_t* other)
+static bool string_is_substring_of(str_t* self, str_t* other)
 {
         if (self -> length < other -> length) {
                 return false;
@@ -79,7 +79,7 @@ bool string_is_substring_of(str_t* self, str_t* other)
         return false;
 }
 
-int string_index_of(str_t* self, char* character)
+static int string_index_of(str_t* self, char* character)
 {
         if (self -> length == 0) {
                 return -1;
@@ -92,9 +92,20 @@ int string_index_of(str_t* self, char* character)
         return -1;
 }
 
-void string_fill(str_t* self, char* character)
+static void string_fill(str_t* self, char* character)
 {
         for (int i = 0; i < self -> length; i++) {
                 self -> data[i] = character[0];
         }
 }
+
+namespace_string const string = {
+        string_init,
+        string_free,
+        string_prepend,
+        string_append,
+        string_equals,
+        string_is_substring_of,
+        string_index_of,
+        string_fill
+};
