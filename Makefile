@@ -1,4 +1,5 @@
-filename=src/main.c
+lib=src/str.c
+playground=playground.c
 
 all:
-	gcc -Wall playground.c src/str.c -o playground
+	gcc -Wall ${playground} ${lib} -o playground
