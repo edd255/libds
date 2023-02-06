@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stddef.h>
 #include <stdbool.h>
-#include "str.h"
+#include "ds.h"
 
 static size_t char_get_length(const char *str)
 {
