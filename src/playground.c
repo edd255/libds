@@ -4,21 +4,21 @@
 #include "src/ds.h"
 
 
-void test_length_1()
+void test_length_1(void)
 {
         str_t* str = string_init("edd255");
         assert(str -> length == 6);
         str->fn->free(str);
 }
 
-void test_length_2()
+void test_length_2(void)
 {
         str_t* str = string_init("");
         assert(str -> length == 0);
         str->fn->free(str);
 }
 
-void test_equality_1()
+void test_equality_1(void)
 {
         str_t* string1 = string_init("edd255");
         str_t* string2 = string_init("edd255");
@@ -27,7 +27,7 @@ void test_equality_1()
         string2->fn->free(string2);
 }
 
-void test_equality_2()
+void test_equality_2(void)
 {
         str_t* string1 = string_init("edd255");
         str_t* string2 = string_init("edd256");
@@ -36,7 +36,7 @@ void test_equality_2()
         string2->fn->free(string2);
 }
 
-void test_substring_1()
+void test_substring_1(void)
 {
         str_t* str = string_init("edd255");
         str_t* sub = string_init("d2");
@@ -45,7 +45,7 @@ void test_substring_1()
         sub->fn->free(sub);
 }
 
-void test_substring_2()
+void test_substring_2(void)
 {
         str_t* str = string_init("edd255");
         str_t* sub = string_init("d3");
@@ -54,21 +54,21 @@ void test_substring_2()
         sub->fn->free(sub);
 }
 
-void test_index_of_1()
+void test_index_of_1(void)
 {
         str_t* str = string_init("edd255");
         assert(str->fn->index_of(str, "d") == 1);
         str->fn->free(str);
 }
 
-void test_index_of_2()
+void test_index_of_2(void)
 {
         str_t* str = string_init("edd255");
         assert(str->fn->index_of(str, "6") == -1);
         str->fn->free(str);
 }
 
-void test_append_1()
+void test_append_1(void)
 {
         str_t* string1 = string_init("Hello ");
         str_t* string2 = string_init("World!");
@@ -82,7 +82,7 @@ void test_append_1()
         string4->fn->free(string4);
 }
 
-void test_append_2()
+void test_append_2(void)
 {
         str_t* string1 = string_init("");
         str_t* string2 = string_init("");
@@ -97,7 +97,7 @@ void test_append_2()
 }
 
 
-int main()
+int main(void)
 {
         test_length_1();
         test_length_2();
