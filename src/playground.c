@@ -1,7 +1,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <assert.h>
-#include "src/ds.h"
+#include "ds.h"
 
 
 void test_length_1(void)
