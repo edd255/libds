@@ -4,9 +4,10 @@ MAIN := src/playground.c
 OUT  := bin/playground
 
 ERROR_FLAGS    := -Wall -Wpedantic -Wextra -Werror
-DEBUG_FLAGS    := -Og -g -fsanitize=address -fsanitize=undefined
+DEBUG_FLAGS    := -Og -gdwarf-4 -fsanitize=address -fsanitize=undefined
 OPT_FLAGS      := -Ofast
 VALGRIND_FLAGS := --leak-check=full --show-leak-kinds=all --track-origins=yes
+MAKEFLAGS      := --jobs=$(shell nproc)
 
 all: debug opt memcheck
 
